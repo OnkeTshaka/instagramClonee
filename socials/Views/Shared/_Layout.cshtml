@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - socials</title>
+    @Styles.Render("~/Content/css")
+            @Scripts.Render("~/bundles/modernizr")
+            <link href="~/Content/w3.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/css.css" rel="stylesheet" />
+</head>
+<body>
+    @{ bool hideHeader = ViewBag.Title == "Register" || ViewBag.Title == "Log in"; }
+    @if (!hideHeader)
+    {
+        <header>
+            <div class="wrapper clearfix">
+                <a class="title" href="~/">
+                    <img src="~/Images/logo.png" /></a>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </header>
+    }
+    <main>
+        @RenderBody()
+    </main>
+    <div class="modal">
+        <button class="modal__close link" title="Close"><i class="fab fa-times"></i> </button>
+        <div class="modal__content"></div>
+    </div>
+    @Scripts.Render("~/bundles/js")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

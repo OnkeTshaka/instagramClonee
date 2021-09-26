@@ -1,0 +1,41 @@
+﻿@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("Index", "Search", FormMethod.Get, new { @class = "search-form" }))
+    {
+        <input type="text" name="search" id="search" placeholder="Search" autocomplete="off" spellcheck="false"
+               value="@Request["search"]" />
+    }
+
+    <ul class="menu-actions">
+        <li><a href="@Url.Action("Create", "Post")" title="Upload">@*<i class="fa fa-camera"></i>*@
+<img src="~/Images/Icons/photo-camera.png" style="width:25px;height:25px;"/></a></li>
+        <li><a href="#" title="Explore">@*<i class="fa fa-globe"></i>*@
+                <img src="~/Images/Icons/world.png" style="width:25px;height:25px;"/></a></li>
+        <li>
+            <a href="@Url.Action("Index", "Notifications")" title="Notifications">
+                @*<i class="fa fa-heart"></i>*@
+                <img src="~/Images/Icons/heart.png" style="width:25px;height:25px;"/>
+                @{ var notifications = Html.Action("Count", "Notifications").ToString(); }
+                @if (Convert.ToInt32(notifications) > 0)
+                {
+                    <span class="count" style="border-radius:100%;font-size:10px">@notifications</span>
+                }
+            </a>
+        </li>
+        <li>
+            <a href="@Url.Action("Details", "Profile", new { id = User.Identity.Name })" title="Profile">
+                @*<i class="fa fa-user"></i>*@
+                <img src="~/Images/Icons/profile-user.png" style="width:25px;height:25px;"/>
+         </a>
+            <a class="button" href="@Url.Action("Logoff", "Account")">Logout</a>
+
+        </li>
+    </ul>
+                    }
+                    else
+                    {
+                        <ul class="menu-actions">
+                            <li><a href="@Url.Action("Register", "Account")" title="Register">Sign up</a></li>
+                            <li><a href="@Url.Action("Login", "Account")" title="Login">Log in</a></li>
+                        </ul>
+                    }
